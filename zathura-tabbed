@@ -18,4 +18,5 @@ then
 else
     read xid < <(tabbed -cdn "$wmclass" -p -1 zathura "$uri" -e 2>/dev/null)
     wmctrl -i -r "$xid" -b add,maximized_vert,maximized_horz
+    echo "$xid" > "$xidfile"
 fi

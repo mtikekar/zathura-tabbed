@@ -1,6 +1,6 @@
 # mupdf + zathura + tabbed
 
-[Zathura](https://pwmt.org/projects/zathura) document viewer using [mupdf](http://mupdf.com) backend and embedded in [tabbed](http://tools.suckless.org/tabbed).
+[Zathura](https://pwmt.org/projects/zathura) document viewer using [mupdf](http://mupdf.com) backend and embedded in [tabbed](http://tools.suckless.org/tabbed). [wmctrl](https://sites.google.com/site/tstyblo//wmctrl) is used to control the zathura window - to open it maximized by default and to bring it into focus when new tab is added from command line.
 
 ## Compiling
 
@@ -44,6 +44,7 @@ mkdir ~/.config/zathura
 cp zathurarc ~/.config/zathura/
 cp zathura.desktop ~/.local/share/applications/
 xdg-mime default zathura.desktop application/pdf application/oxps application/epub+zip
+sudo apt-get install wmctrl
 ```
 
 Add `/opt/zathura/bin` to path at login (In `~/.profile` for example)

@@ -21,9 +21,13 @@ make PREFIX=/opt/zathura install-headers
 
 `env PKG_CONFIG_PATH=/opt/zathura/lib/pkgconfig make PREFIX=/opt/zathura WITH_SQLITE=0 WITH_MAGIC=0 LDFLAGS="-Wl,-rpath='\$\$ORIGIN/../lib'" install`
 
+The rpath setting is so that the `zathura` executable can find `libgirara-gtk3.so` at runtime. If the dollar escapes in the command get messed up somehow, you can fix rpath in the executable by running:
+
+`patchelf --set-rpath '$ORIGIN/../lib' /opt/zathura/bin/zathura`
+
 ### zathura-pdf-mupdf
 
-1. edit config.mk: prepend to INC -I<mupdf>/include, prepend to LIB -L<mupdf>/build/release
+1. edit config.mk: prepend to INC `-I<mupdf>/include`, prepend to LIB `-L<mupdf>/build/release`. (replace `<mupdf>` with path to mupdf folder). Since mupdf libraries were built statically, rpath setting is not needed.
 2. You might need to install a few system libraries and dev files like libopenjp2 and libssl (for libcrypto)
 3. `env PKG_CONFIG_PATH=/opt/zathura/lib/pkgconfig make`
 4. Copy `pdf.so` to `/opt/zathura/lib/zathura/pdf.so`

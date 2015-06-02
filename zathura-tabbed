@@ -10,11 +10,13 @@ then
 fi
 
 # check if a tabbed window is open
-[ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS | grep "$wmclass" &> /dev/null
+set -o pipefail
+[ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS 2> /dev/null | grep -q "$wmclass"
 if [ $? -eq 0 ];
 then
+    zathura "$uri" -e "$xid" &> /dev/null &
     wmctrl -i -R "$xid"
-    zathura -e "$xid" "$uri" &> /dev/null &
 else
-    tabbed -dn "$wmclass" -r 2 zathura -e '' "$uri" >"$xidfile" 2>/dev/null &
+    read xid < <(tabbed -cdn "$wmclass" -p -1 zathura "$uri" -e 2>/dev/null)
+    wmctrl -i -r "$xid" -b add,maximized_vert,maximized_horz
 fi

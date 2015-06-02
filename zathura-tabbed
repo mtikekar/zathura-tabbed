@@ -11,8 +11,7 @@ fi
 
 # check if a tabbed window is open
 set -o pipefail
-[ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS 2> /dev/null | grep -q "$wmclass"
-if [ $? -eq 0 ];
+if [ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS 2> /dev/null | grep -q "$wmclass";
 then
     zathura "$uri" -e "$xid" &> /dev/null &
     wmctrl -i -R "$xid"

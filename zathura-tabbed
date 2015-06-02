@@ -1,0 +1,20 @@
+#!/bin/bash
+
+xidfile="/run/user/"$(id -u)"/zathura-tabbed.xid"
+uri=""
+wmclass="zathura-tabbed"
+
+if [ "$#" -gt 0 ];
+then
+    uri="$1"
+fi
+
+# check if a tabbed window is open
+[ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS | grep "$wmclass" &> /dev/null
+if [ $? -eq 0 ];
+then
+    wmctrl -i -R "$xid"
+    zathura -e "$xid" "$uri" &> /dev/null &
+else
+    tabbed -dn "$wmclass" -r 2 zathura -e '' "$uri" >"$xidfile" 2>/dev/null &
+fi

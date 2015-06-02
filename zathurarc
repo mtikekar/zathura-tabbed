@@ -1,0 +1,14 @@
+map <Left> navigate previous
+map <Right> navigate next
+map <C-=> zoom in
+map <C--> zoom out
+map B jumplist backward
+map b jumplist forward
+
+set recolor true
+set recolor-keephue true
+set recolor-lightcolor "#ffffff"
+set recolor-darkcolor "#333333"
+set recolor-reverse-video true
+
+set default-bg "#2a2c2e"

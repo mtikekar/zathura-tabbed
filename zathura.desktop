@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Zathura
+Comment=A minimalistic document viewer
+Exec=zathura-tabbed %f
+Terminal=false
+Icon=evince
+Categories=Office;Viewer;
+MimeType=application/pdf;application/oxps;application/epub+zip;
+Keywords=PDF;PS;PostScript;DjVU;document;presentation;

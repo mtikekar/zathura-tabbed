@@ -2,6 +2,10 @@
 
 [Zathura](https://pwmt.org/projects/zathura) document viewer using [mupdf](http://mupdf.com) backend and embedded in [tabbed](http://tools.suckless.org/tabbed). [wmctrl](https://sites.google.com/site/tstyblo//wmctrl) is used to control the zathura window - to open it maximized by default and to bring it into focus when new tab is added from command line.
 
+## How to use
+
+`zathura-tabbed 1.pdf 2.pdf 3.epub ...`
+
 ## Compiling
 
 Download sources for mupdf, [girara](https://pwmt.org/projects/girara), zathura, [zathura-pdf-mupdf](https://pwmt.org/projects/zathura-pdf-mupdf), tabbed
@@ -18,6 +22,8 @@ make PREFIX=/opt/zathura install-headers
 ```
 
 ### zathura
+
+I have a patch for zathura-0.3.3 that enables multiple files to be opened inside tabbed using `zathura-embedded 1.pdf 2.pdf ...`. Without the patch, only the first pdf opens in tabbed and the rest are opened in separate windows. Apply the patch: `patch <zathura>/zathura/main.c main.diff`
 
 `env PKG_CONFIG_PATH=/opt/zathura/lib/pkgconfig make PREFIX=/opt/zathura WITH_SQLITE=0 WITH_MAGIC=0 LDFLAGS="-Wl,-rpath='\$\$ORIGIN/../lib'" install`
 

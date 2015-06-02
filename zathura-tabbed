@@ -1,22 +1,16 @@
 #!/bin/bash
 
 xidfile="/run/user/"$(id -u)"/zathura-tabbed.xid"
-uri=""
 wmclass="zathura-tabbed"
-
-if [ "$#" -gt 0 ];
-then
-    uri="$1"
-fi
 
 # check if a tabbed window is open
 set -o pipefail
 if [ -r "$xidfile" ] && xid=$(cat "$xidfile") && xprop -id "$xid" WM_CLASS 2> /dev/null | grep -q "$wmclass";
 then
-    zathura "$uri" -e "$xid" &> /dev/null &
     wmctrl -i -R "$xid"
 else
-    read xid < <(tabbed -cdn "$wmclass" -p -1 zathura "$uri" -e 2>/dev/null)
+    read xid < <(tabbed -cdn "$wmclass" -p -1 2> /dev/null)
     wmctrl -i -r "$xid" -b add,maximized_vert,maximized_horz
     echo "$xid" > "$xidfile"
 fi
+zathura -e "$xid" "$@" &> /dev/null &

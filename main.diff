@@ -1,0 +1,20 @@
+211a212,213
+>         NULL,
+>         NULL,
+213a216,231
+> 
+> #ifdef GDK_WINDOWING_X11
+>       if (embed != 0) {
+>         int ii = 0;
+>         while (new_argv[ii] != NULL) {
+>           ii++;
+>         }
+> 
+>         char c[30];
+>         int nc = snprintf(c, 30, "%d", (int)embed);
+>         if (nc >= 0 && nc < 30) {
+>           new_argv[ii] = "-e";
+>           new_argv[ii+1] = c;
+>         }
+>       }
+> #endif
